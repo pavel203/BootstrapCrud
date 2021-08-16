@@ -2,24 +2,24 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Новый Пользователь</title>
+    <title>New User</title>
 </head>
 <body>
 
 <form th:method="post" th:action="@{/users}" th:object="${user}">
-    <label for="name">Введите имя</label>
+    <label for="name">Enter your name</label>
     <input type="text" th:field="*{name}" id="name"/>
     <br/>
 
-    <label for="lastName">Введите фамилию</label>
+    <label for="lastName">Enter your lastname</label>
     <input type="text" th:field="*{lastName}" id="lastName"/>
     <br/>
 
-    <label for="age">Ваш возраст</label>
+    <label for="age">Enter your age</label>
     <input type="text" th:field="*{age}" id="age"/>
     <br/>
 
-    <input type="submit" value="Отправить."/>
+    <input type="submit" value="Save."/>
 </form>
 
 </body>

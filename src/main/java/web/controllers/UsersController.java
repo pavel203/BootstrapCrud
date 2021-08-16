@@ -19,12 +19,6 @@ public class UsersController {
     @Autowired
     private UserService userService;
 
-    public static void main(String[] args) {
-        UserDao userDao = new UserDaoImpl();
-        UsersController.getAllUsers();
-        //userDao.getAllUsers();
-    }
-
     @GetMapping()
     public String index(Model model) { //allUsers
         List<User> users = userService.getAllUsers();
@@ -39,14 +33,14 @@ public class UsersController {
     }
 
     @GetMapping("/new")
-    public String newPerson(@ModelAttribute("user") User user) {
+    public String newUser(@ModelAttribute("user") User user) {
         return "users/new";
     }
 
     @PostMapping()
     public String create(@ModelAttribute("user") User user) {
         userService.addUser(user);
-        return "redirect:/users";
+        return "redirect:/users/success";
     }
 
     @GetMapping("/{id}/edit")
@@ -58,13 +52,13 @@ public class UsersController {
     @PostMapping("/{id}")
     public String update(@ModelAttribute("user") User user, @PathVariable("id") int id) {
         userService.updateUser(user);
-        return "redirect:/users";
+        return "redirect:/users/success";
     }
 
     @DeleteMapping("{id}")
     public String delete(@PathVariable("id") int id) {
         userService.deleteUser(userService.getUserById(id));
-        return "redirect:/users";
+        return "redirect:/users/success";
     }
 
 

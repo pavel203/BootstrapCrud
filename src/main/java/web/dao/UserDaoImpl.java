@@ -4,7 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import web.models.User;
+
+import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Component
@@ -17,14 +20,18 @@ public class UserDaoImpl implements UserDao {
     @Override
     @SuppressWarnings("unchecked")
     public List<User> getAllUsers() {
-        System.out.println("я тут");
         return entityManagerFactory.createEntityManager().createQuery("from User ", User.class).getResultList();
     }
 
     @Override
     public void addUser(User user) {
-        System.out.println("я тут");
-        entityManagerFactory.createEntityManager().persist(user);
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+
+        entityManager.getTransaction().begin();
+
+        entityManager.persist(user);
+
+        entityManager.getTransaction().commit();
     }
 
     @Override
