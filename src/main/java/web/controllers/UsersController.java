@@ -19,7 +19,6 @@ public class UsersController {
     public String index(Model model) {
         List<User> users = userService.getAllUsers();
         model.addAttribute("users", users);
-        System.out.println("я в контроллере index");
         return "users/index";
     }
 
@@ -43,21 +42,18 @@ public class UsersController {
 
     @GetMapping("/{id}/edit")
     public String showEditForm(Model model, @PathVariable("id") int id) {
-        System.out.println("я в контроллере showEditForm");
         model.addAttribute("user", userService.getUserById(id));
         return "users/edit";
     }
 
     @PostMapping("/{id}")
     public String update(@ModelAttribute("user") User user) {
-        System.out.println("я в контроллере update");
         userService.updateUser(user);
         return "redirect:/users";
     }
 
     @PostMapping("/delete/{id}")
     public String delete(@PathVariable("id") int id) {
-        System.out.println("я в контроллере delete");
         userService.deleteUser(id);
         return "redirect:/users";
     }
