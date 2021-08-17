@@ -1,13 +1,14 @@
 package web.models;
 
 import jdk.nashorn.internal.objects.annotations.Getter;
+import org.hibernate.annotations.NotFound;
 
 import javax.persistence.*;
 import java.util.Objects;
 
-
 @Entity
 @Table(name = "users") //id использовать ли в иквелз
+//long или int
 public class User {
 
     @Id

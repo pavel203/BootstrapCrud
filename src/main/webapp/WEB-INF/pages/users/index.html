@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Home Page</title>
@@ -21,7 +21,12 @@
         <td th:utext="${user.getName()}">Name</td>
         <td th:utext="${user.getLastName()}">Last Name</td>
         <td th:utext="${user.getAge()}">Age</td>
-
+        <td>
+            <a th:href="@{/users/{id}/edit(id=${user.getId()})}">Edit</a>
+        </td>
+        <td>
+            <a th:href="@{/users/{id}(id=${user.getId()})}">Delete</a>
+        </td>
     </tr>
 </table>
 <br>

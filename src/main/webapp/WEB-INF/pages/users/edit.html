@@ -1,25 +1,25 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Редактирование пользователя</title>
+    <title>Updating</title>
 </head>
 <body>
 
-<form th:method="PATCH" th:action="@{/users/{id}(id=${user.getId()})}" th:object="${user}">
-    <label for="name">Введите имя</label>
+<form th:method="post" th:action="@{/users/{id}(id=${user.getId()})}" th:object="${user}">
+    <label for="name">Enter name</label>
     <input type="text" th:field="*{name}" id="name"/>
     <br/>
 
-    <label for="lastName">Введите фамилию</label>
+    <label for="lastName">Enter lastname</label>
     <input type="text" th:field="*{lastName}" id="lastName"/>
     <br/>
 
-    <label for="age">Ваш возраст</label>
+    <label for="age">Enter age</label>
     <input type="text" th:field="*{age}" id="age"/>
     <br/>
 
-    <input type="submit" value="Изменить."/>
+    <input type="submit" value="Save changes."/>
 </form>
 
 </body>

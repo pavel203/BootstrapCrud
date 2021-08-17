@@ -4,12 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
-import web.dao.UserDao;
-import web.dao.UserDaoImpl;
 import web.models.User;
 import web.services.UserService;
-
-import java.nio.file.attribute.UserDefinedFileAttributeView;
 import java.util.List;
 
 @Controller
@@ -20,9 +16,10 @@ public class UsersController {
     private UserService userService;
 
     @GetMapping()
-    public String index(Model model) { //allUsers
+    public String index(Model model) {
         List<User> users = userService.getAllUsers();
         model.addAttribute("users", users);
+        System.out.println("я в контроллере index");
         return "users/index";
     }
 
@@ -33,59 +30,36 @@ public class UsersController {
     }
 
     @GetMapping("/new")
-    public String newUser(@ModelAttribute("user") User user) {
+    public String showFormForNewUser(Model model) {
+        model.addAttribute("user", new User());
         return "users/new";
     }
 
     @PostMapping()
-    public String create(@ModelAttribute("user") User user) {
+    public String createUser(@ModelAttribute("user") User user) {
         userService.addUser(user);
-        return "redirect:/users/success";
+        return "redirect:/users";
     }
 
     @GetMapping("/{id}/edit")
-    public String edit(Model model, @PathVariable("id") int id) {
+    public String showEditForm(Model model, @PathVariable("id") int id) {
+        System.out.println("я в контроллере showEditForm");
         model.addAttribute("user", userService.getUserById(id));
         return "users/edit";
     }
 
     @PostMapping("/{id}")
-    public String update(@ModelAttribute("user") User user, @PathVariable("id") int id) {
+    public String update(@ModelAttribute("user") User user) {
+        System.out.println("я в контроллере update");
         userService.updateUser(user);
-        return "redirect:/users/success";
+        return "redirect:/users";
     }
 
-    @DeleteMapping("{id}")
+    @PostMapping("/delete/{id}")
     public String delete(@PathVariable("id") int id) {
-        userService.deleteUser(userService.getUserById(id));
-        return "redirect:/users/success";
+        System.out.println("я в контроллере delete");
+        userService.deleteUser(id);
+        return "redirect:/users";
     }
-
-
-
-
-    /*@GetMapping("/new")
-    public String newUser(@ModelAttribute("user") User user, Model model) {
-        model.addAttribute("user", new User());
-
-        return "users/new";
-    }
-
-     */
-
-    /*@PostMapping("/users")
-    public String create(@RequestParam("name") String name,
-                         @RequestParam("lastName") String lastName,
-                         @RequestParam("age") int age,
-                         Model model) {
-        User user = new User();
-        user.setName(name);
-        user.setLastName(lastName);
-        user.setAge(age);
-        userService.addUser(user);
-        return "users/new";
-    }
-
-     */
 
 }
