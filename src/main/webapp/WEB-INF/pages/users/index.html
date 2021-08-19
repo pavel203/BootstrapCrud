@@ -10,7 +10,7 @@
 <table border="2">
     <tr>
         <th>Id</th>
-        <th>Name</th>
+        <th>First Name</th>
         <th>Last Name</th>
         <th>Age</th>
         <th>Edit</th>
@@ -18,7 +18,7 @@
     </tr>
     <tr th:each="user: ${users}">
         <td th:utext="${user.getId()}">Id</td>
-        <td th:utext="${user.getName()}">Name</td>
+        <td th:utext="${user.getFirstName()}">First Name</td>
         <td th:utext="${user.getLastName()}">Last Name</td>
         <td th:utext="${user.getAge()}">Age</td>
         <td>
