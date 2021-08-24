@@ -6,13 +6,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import web.repository.RoleRepository;
-import web.repository.UserRepository;
 import web.models.User;
 import web.services.UserService;
 import java.util.List;
 
 @Controller
-@RequestMapping("")
+@RequestMapping("") //?
 public class UsersController {
     @Autowired
     private UserService userService;
@@ -75,13 +74,5 @@ public class UsersController {
         userService.deleteUser(id);
         return "redirect:/admin";
     }
-
-
-        /*@GetMapping("/login")
-    public String loginPage() {
-        return "login";
-    }
-
-     */
 
 }

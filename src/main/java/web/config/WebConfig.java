@@ -1,7 +1,6 @@
 package web.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -17,16 +16,11 @@ import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = "web")
-@EntityScan(basePackages = "web")
 @EnableJpaRepositories
 public class WebConfig implements WebMvcConfigurer {
 
     @Autowired
-    private final ApplicationContext applicationContext;
-
-    public WebConfig(ApplicationContext applicationContext) {
-        this.applicationContext = applicationContext;
-    }
+    private ApplicationContext applicationContext;
 
     @Bean
     public SpringResourceTemplateResolver templateResolver() {
