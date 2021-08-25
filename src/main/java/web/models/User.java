@@ -3,6 +3,10 @@ package web.models;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -15,18 +19,28 @@ public class User  implements UserDetails {
     private int id;
 
     @Column(unique = true)
+    @NotEmpty(message = "Username should not be empty.")
+    @Size(min = 2, max = 20, message = "Username should have at least 2 and the max of 20 characters.")
     private String userName;
 
     @Column
+    @NotEmpty(message = "Password should not be empty.")
+    @Size(min = 4, max = 20, message = "Password should have at least 4 and the max of 20 characters.")
     private String password;
 
     @Column
+    @NotEmpty(message = "Firstname should not be empty.")
+    @Size(min = 2)
     private String firstName;
 
     @Column
+    @Size(min = 2)
+    @NotEmpty(message = "Lastname should not be empty.")
     private String lastName;
 
     @Column
+    @Min(value = 0, message = "Age should be greater then 0.")
+    @Max(value = 150, message = "Age should be greater then 150." )
     private int age;
 
     @ManyToMany(
@@ -143,11 +157,15 @@ public class User  implements UserDetails {
 
     @Override
     public String toString() {
-        return "User{userName='" + userName + '\'' +
+        return "User{" +
+                "id=" + id +
+                ", userName='" + userName + '\'' +
                 ", password='" + password + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", age=" + age +
                 ", roles=" + roles +
                 '}';
     }
-
-
 }
+

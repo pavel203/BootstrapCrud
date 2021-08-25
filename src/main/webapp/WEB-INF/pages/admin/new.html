@@ -9,23 +9,28 @@
 <form th:method="post" th:action="@{/admin}" th:object="${user}">
     <label for="username">Enter your username</label>
     <input th:type="text" th:field="*{userName}" id="username"/>
+    <div style="color:red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username error</div>
     <br/>
 
     <label for="password">Enter your password</label>
     <input th:type="text" th:field="*{password}" id="password"/>
+    <div style="color:red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password error</div>
 
     <br/>
 
-    <label for="name">Enter your first name</label>
-    <input th:type="text" th:field="*{firstName}" id="name"/>
+    <label for="firstName">Enter your first name</label>
+    <input th:type="text" th:field="*{firstName}" id="firstName"/>
+    <div style="color:red" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">Firstname error</div>
     <br/>
 
     <label for="lastName">Enter your lastname</label>
     <input th:type="text" th:field="*{lastName}" id="lastName"/>
+    <div style="color:red" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Lastname error</div>
     <br/>
 
     <label>Enter your age</label>
     <input th:type="number" th:field="*{age}"/>
+    <div style="color:red" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Age error</div>
     <br/>
 
     <label>Enter role</label>

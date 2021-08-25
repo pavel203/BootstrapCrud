@@ -40,9 +40,7 @@ public class UserRepositoryTests {
     @Test
     public void anyTest() {
 
-        System.out.println(userRepository.getById(6));
     }
-
 
     @Test
     public void insertRolesIntoDataBase() {
@@ -78,53 +76,21 @@ public class UserRepositoryTests {
 
 
     @Test
-    public void createUserWithTwoRoles() {
-        Role roleUser = testEntityManager.find(Role.class, 1);
-        Role roleAdmin = testEntityManager.find(Role.class, 2);
-        User user = new User("User-Admin", "User-Admin");
-        //user.setRole(roleUser);
-        //user.setRole(roleAdmin);
-        userRepository.save(user);
-    }
+    public void createUserWithTwoRoles() {}
 
     @Test
-    public void assignRoleToExistingUser() {
-        User user = userDao.getUserById(5);
-        Role roleAdmin = testEntityManager.find(Role.class, 1);
-
-        //user.setRole(roleAdmin);
-
-        System.out.println(user);
-    }
+    public void assignRoleToExistingUser() {}
 
     @Test
-    public void removeRoleFromExistingUser() {
-        User user = userDao.getUserById(5);
-        //Role roleAdmin = new Role(2);
-        //user.removeRole(roleAdmin);
-
-    }
+    public void removeRoleFromExistingUser() {}
 
     @Test
-    public void createUserWithNewRole() {
-        //Role role = new Role("ROLE_USER");
-        //User user = new User("EDITOR", "EDITOR");
-        //System.out.println(user.getRoles());
-        //user.addRole(role);
-
-        //userDao.addUser(user);
-    }
+    public void createUserWithNewRole() {}
 
     @Test
-    public void getUser() {
-        User user = userRepository.getById(1);
-        System.out.println(user.getUserName());
-        //System.out.println(user.getRoles());
-    }
+    public void getUser() {}
 
     @Test
-    public void removeUser() {
-        userDao.deleteUser(1);
-    }
+    public void removeUser() {}
 
 }

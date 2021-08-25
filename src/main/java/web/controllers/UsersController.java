@@ -1,15 +1,15 @@
 package web.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import web.repository.RoleRepository;
 import web.models.User;
 import web.services.UserService;
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -45,7 +45,12 @@ public class UsersController {
     }
 
     @PostMapping("/admin")
-    public String createUser(@ModelAttribute("user") User user) {
+    public String createUser(@ModelAttribute("user") @Valid User user,
+                             BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "admin/new";
+        }
+
         userService.addUser(user);
         return "redirect:/admin";
     }
@@ -59,7 +64,12 @@ public class UsersController {
     }
 
     @PostMapping("/admin/{id}")
-    public String update(@ModelAttribute("user") User user) {
+    public String update(@ModelAttribute("user") @Valid User user,
+                         BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "admin/edit";
+        }
+
         userService.updateUser(user);
         return "redirect:/admin";
     }

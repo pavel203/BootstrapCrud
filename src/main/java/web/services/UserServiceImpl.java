@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 import web.dao.UserDao;
 import web.models.Role;
 import web.models.User;
-import web.repository.RoleRepository;
 import java.util.List;
 import java.util.Set;
 
@@ -20,9 +19,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Autowired
     private UserDao userDao;
 
-    @Autowired
-    private RoleRepository roleRepository;
-
     @Override
     public List<User> getAllUsers() {
         return userDao.getAllUsers();
@@ -30,7 +26,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     public void addUser(User user) {
-        checkRoles(user);
+        forceSetIdForRole(user);
         userDao.addUser(user);
     }
 
@@ -41,7 +37,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     public void updateUser(User user) {
-        checkRoles(user);
+        forceSetIdForRole(user);
         userDao.updateUser(user);
     }
 
@@ -55,7 +51,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         return userDao.getUserByUsername(userName);
     }
 
-    private User checkRoles(User user) {
+    private User forceSetIdForRole(User user) {
         Set<Role> roles = user.getRoles();
         for (Role role : roles) {
             if (role.getRoleName().equals("ROLE_USER")) role.setId(1);
