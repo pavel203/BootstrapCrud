@@ -8,43 +8,43 @@
 
 <form th:method="post" th:action="@{/admin}" th:object="${user}">
     <label for="username">Enter your username</label>
-    <input type="text" th:field="*{userName}" id="username"/>
+    <input th:type="text" th:field="*{userName}" id="username"/>
     <br/>
 
     <label for="password">Enter your password</label>
-    <input type="text" th:field="*{password}" id="password"/>
+    <input th:type="text" th:field="*{password}" id="password"/>
 
     <br/>
 
     <label for="name">Enter your first name</label>
-    <input type="text" th:field="*{firstName}" id="name"/>
+    <input th:type="text" th:field="*{firstName}" id="name"/>
     <br/>
 
     <label for="lastName">Enter your lastname</label>
-    <input type="text" th:field="*{lastName}" id="lastName"/>
+    <input th:type="text" th:field="*{lastName}" id="lastName"/>
     <br/>
 
     <label>Enter your age</label>
-    <input type="number" th:field="*{age}"/>
+    <input th:type="number" th:field="*{age}"/>
     <br/>
 
     <label>Enter role</label>
     <ul>
         <li>
-            <input type="checkbox" name="roles" th:field="*{roles}" th:value="${ROLE_USER}"/>user
+            <input th:type="checkbox" name="roles" th:field="*{roles}" th:value="${ROLE_USER}"/>user
         </li>
         <li>
-            <input type="checkbox" name="roles" th:field="*{roles}" th:value="${ROLE_ADMIN}" />admin
+            <input th:type="checkbox" name="roles" th:field="*{roles}" th:value="${ROLE_ADMIN}" />admin
         </li>
     </ul>
 
     <br/>
 
-    <input type="submit" value="Save."/>
+    <input th:type="submit" value="Save."/>
 </form>
 <br/>
 <br/>
 <br/>
-<a href="/logout">Log out</a>
+<a href="/logout">Log out.</a>
 </body>
 </html>

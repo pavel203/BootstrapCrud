@@ -1,6 +1,8 @@
 package web.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,7 +13,7 @@ import web.services.UserService;
 import java.util.List;
 
 @Controller
-@RequestMapping("") //?
+@RequestMapping
 public class UsersController {
     @Autowired
     private UserService userService;
@@ -34,7 +36,7 @@ public class UsersController {
 
     }
 
-    @GetMapping("/admin/new") //
+    @GetMapping("/admin/new")
     public String showFormForNewUser(Model model) {
         model.addAttribute("ROLE_USER", roleRepository.findById(1).get());
         model.addAttribute("ROLE_ADMIN", roleRepository.findById(2).get());
@@ -61,7 +63,6 @@ public class UsersController {
         userService.updateUser(user);
         return "redirect:/admin";
     }
-
 
     @GetMapping("/admin/{id}/delete")
     public String delete(Model model, @PathVariable("id") int id) {

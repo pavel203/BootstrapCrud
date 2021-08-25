@@ -39,7 +39,8 @@ public class UserRepositoryTests {
 
     @Test
     public void anyTest() {
-        userDao.getUserById(1).getRoles().forEach(System.out::println);
+
+        System.out.println(userRepository.getById(6));
     }
 
 
@@ -56,14 +57,12 @@ public class UserRepositoryTests {
 
     @Test
     public void createUserWithOneRole() {
-/*
         Optional<Role> roleUser = roleRepository.findById(1);
         User user = new User("USER", "USER");
         Set<Role> set1 = new HashSet<>();
         set1.add(roleUser.get());
         user.setRoles(set1);
 
- */
 
         Optional<Role> roleAdmin = roleRepository.findById(2);
         User admin = new User("ADMIN", "ADMIN");
@@ -71,6 +70,7 @@ public class UserRepositoryTests {
         set2.add(roleAdmin.get());
         admin.setRoles(set2);
 
+        userRepository.save(user);
         userRepository.save(admin);
 
     }

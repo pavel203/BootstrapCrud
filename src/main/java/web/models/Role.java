@@ -13,10 +13,10 @@ public class Role implements GrantedAuthority {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(length = 25, nullable = false)
+    @Column(length = 25, nullable = false, unique = true)
     private String roleName;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "roles")
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE, mappedBy = "roles")
     private Set<User> users = new HashSet<>();
 
     public Role() {}
