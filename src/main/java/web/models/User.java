@@ -40,7 +40,7 @@ public class User  implements UserDetails {
 
     @Column
     @Min(value = 0, message = "Age should be greater then 0.")
-    @Max(value = 150, message = "Age should be greater then 150." )
+    @Max(value = 150, message = "Age should not be greater then 150." )
     private int age;
 
     @ManyToMany(
