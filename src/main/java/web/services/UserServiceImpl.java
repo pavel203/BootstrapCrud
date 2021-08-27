@@ -21,20 +21,13 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Autowired
     private UserDao userDao;
 
-    @Autowired
-    private RoleRepository roleRepository;
-
     @Override
     public List<User> getAllUsers() {
         return userDao.getAllUsers();
     }
 
     @Override
-    public void addUser(User user) {
-        forceSetIdForRole(user);
-
-        userDao.addUser(user);
-    }
+    public void addUser(User user) { userDao.addUser(user);}
 
     @Override
     public void deleteUser(int id) {
@@ -42,10 +35,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public void updateUser(User user) {
-        forceSetIdForRole(user);
-        userDao.updateUser(user);
-    }
+    public void updateUser(User user) { userDao.updateUser(user);}
 
     @Override
     public User getUserById(int id) {
@@ -57,17 +47,4 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         return userDao.getUserByUsername(userName);
     }
 
-    private User forceSetIdForRole(User user) {
-        Set<Role> roles = user.getRoles();
-        for (Role role : roles) {
-            if (role.getRoleName().equals("ROLE_USER")) {
-                role.setId(1);
-            }
-            if (role.getRoleName().equals("ROLE_ADMIN")) {
-                role.setId(2);
-            }
-        }
-
-        return user;
-    }
 }

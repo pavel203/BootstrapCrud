@@ -7,16 +7,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
-import web.config.*;
-import web.repository.RoleRepository;
+import web.config.HibernateConfig;
+import web.config.WebConfig;
 import web.dao.UserDao;
-import web.repository.UserRepository;
 import web.models.Role;
-import web.models.User;
+import web.repository.RoleRepository;
+import web.repository.UserRepository;
 import web.security.SecurityConfig;
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
 
 @SpringBootTest(classes = {HibernateConfig.class, SecurityConfig.class, WebConfig.class})
 @RunWith(SpringRunner.class)
@@ -39,7 +36,7 @@ public class UserRepositoryTests {
 
     @Test
     public void anyTest() {
-
+        System.out.println(roleRepository.findById("ROLE_USER"));
     }
 
     @Test
@@ -47,6 +44,7 @@ public class UserRepositoryTests {
 
         Role roleUser = new Role("ROLE_USER");
         Role roleAdmin = new Role("ROLE_ADMIN");
+
         testEntityManager.persist(roleUser);
         testEntityManager.persist(roleAdmin);
 
@@ -54,26 +52,7 @@ public class UserRepositoryTests {
     }
 
     @Test
-    public void createUserWithOneRole() {
-        Optional<Role> roleUser = roleRepository.findById(1);
-        User user = new User("USER", "USER");
-        Set<Role> set1 = new HashSet<>();
-        set1.add(roleUser.get());
-        user.setRoles(set1);
-
-
-        Optional<Role> roleAdmin = roleRepository.findById(2);
-        User admin = new User("ADMIN", "ADMIN");
-        Set<Role> set2 = new HashSet<>();
-        set2.add(roleAdmin.get());
-        admin.setRoles(set2);
-
-        userRepository.save(user);
-        userRepository.save(admin);
-
-    }
-
-
+    public void createUserWithOneRole() {}
 
     @Test
     public void createUserWithTwoRoles() {}

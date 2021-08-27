@@ -6,8 +6,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import web.repository.RoleRepository;
 import web.models.User;
+import web.repository.RoleRepository;
 import web.services.UserService;
 import javax.validation.Valid;
 import java.util.List;
@@ -37,17 +37,20 @@ public class UsersController {
     }
 
     @GetMapping("/admin/new")
-    public String showFormForNewUser(Model model) {
-        model.addAttribute("ROLE_USER", roleRepository.findById(1).get());
-        model.addAttribute("ROLE_ADMIN", roleRepository.findById(2).get());
+    public String showFormForNewUser(@ModelAttribute("user") User user, Model model) {
+        model.addAttribute("ROLE_USER", roleRepository.findById("ROLE_USER").get());
+        model.addAttribute("ROLE_ADMIN", roleRepository.findById("ROLE_ADMIN").get());
         model.addAttribute("user", new User());
         return "admin/new";
     }
 
     @PostMapping("/admin")
     public String createUser(@ModelAttribute("user") @Valid User user,
-                             BindingResult bindingResult) {
+                             BindingResult bindingResult,
+                             Model model) {
         if (bindingResult.hasErrors()) {
+            model.addAttribute("ROLE_USER", roleRepository.findById("ROLE_USER").get());
+            model.addAttribute("ROLE_ADMIN", roleRepository.findById("ROLE_ADMIN").get());
             return "admin/new";
         }
 
@@ -57,8 +60,8 @@ public class UsersController {
 
     @GetMapping("/admin/{id}/edit")
     public String showEditForm(Model model, @PathVariable("id") int id) {
-        model.addAttribute("ROLE_USER", roleRepository.findById(1).get());
-        model.addAttribute("ROLE_ADMIN", roleRepository.findById(2).get());
+        model.addAttribute("ROLE_USER", roleRepository.findById("ROLE_USER").get());
+        model.addAttribute("ROLE_ADMIN", roleRepository.findById("ROLE_ADMIN").get());
         model.addAttribute("user", userService.getUserById(id));
         return "admin/edit";
     }

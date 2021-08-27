@@ -21,7 +21,8 @@ public class AppInit extends AbstractAnnotationConfigDispatcherServletInitialize
         return new String[]{"/"};
     }
 
-    /* Фильтр для Patch и Delete
+    /* Оставляю если понадобится
+    Фильтр для Patch и Delete
     @Override
     public void onStartup(ServletContext aServletContext) throws ServletException {
         super.onStartup(aServletContext);

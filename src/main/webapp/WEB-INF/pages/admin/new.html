@@ -8,8 +8,8 @@
 
 <form th:method="post" th:action="@{/admin}" th:object="${user}">
     <label for="username">Enter your username</label>
-    <input th:type="text" th:field="*{userName}" id="username"/>
-    <div style="color:red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username error</div>
+    <input th:type="text" th:field="*{userName}" id="userName"/>
+    <div style="color:red" th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}">Username error</div>
     <br/>
 
     <label for="password">Enter your password</label>
