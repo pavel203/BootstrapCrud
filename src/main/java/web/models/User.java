@@ -20,12 +20,12 @@ public class User  implements UserDetails {
 
     @Column(unique = true)
     @NotEmpty(message = "Username should not be empty.")
-    @Size(min = 2, max = 20, message = "Username should have at least 2 and the max of 20 characters.")
-    private String userName;
+    @Size(min = 2, max = 50, message = "Username should have at least 2 and the max of 20 characters.")
+    private String email;
 
     @Column
     @NotEmpty(message = "Password should not be empty.")
-    @Size(min = 4, max = 20, message = "Password should have at least 4 and the max of 20 characters.")
+    @Size(min = 4, max = 50, message = "Password should have at least 4 and the max of 20 characters.")
     private String password;
 
     @Column
@@ -55,13 +55,13 @@ public class User  implements UserDetails {
 
     public User() {}
 
-    public User(String userName, String password) {
-        this.userName = userName;
+    public User(String email, String password) {
+        this.email = email;
         this.password = password;
     }
 
-    public User(String userName, String password, String firstName, String lastName, int age, Set<Role> roles) {
-        this.userName = userName;
+    public User(String email, String password, String firstName, String lastName, int age, Set<Role> roles) {
+        this.email = email;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -77,12 +77,12 @@ public class User  implements UserDetails {
         this.id = id;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getEmail() {
+        return email;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public void setPassword(String password) {
@@ -132,7 +132,7 @@ public class User  implements UserDetails {
 
     @Override
     public String getUsername() {
-        return userName;
+        return email;
     }
 
     @Override
@@ -159,7 +159,7 @@ public class User  implements UserDetails {
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", userName='" + userName + '\'' +
+                ", userName='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +

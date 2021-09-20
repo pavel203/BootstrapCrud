@@ -47,7 +47,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public UserDetails getUserByUsername(String s) throws UsernameNotFoundException {
         UserDetails user = (UserDetails) entityManager
-                .createQuery("from User where userName = :userName").setParameter("userName", s)
+                .createQuery("from User where email = :email").setParameter("email", s)
                 .getSingleResult();
         if (user == null) {
             throw new UsernameNotFoundException("Пользователя с таким именем не существует.");

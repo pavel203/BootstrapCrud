@@ -9,6 +9,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class AppController {
 
+    @GetMapping("/")
+    public String showMainPage() {
+        return "mainPage";
+    }
+
     @GetMapping("/login")
     public String getLoginPage() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -17,4 +22,14 @@ public class AppController {
         }
         return "/errors/alreadyLoggedIn";
     }
+
+
+//    @GetMapping("/")
+//    public String showMainPage(Model model) {
+//        //List<User> users = userService.getAllUsers();
+//        //model.addAttribute("users", users);
+//        //User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        //model.addAttribute("principal", principal);
+//        return "mainPage";
+//    }
 }
